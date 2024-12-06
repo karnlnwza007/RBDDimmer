@@ -161,29 +161,29 @@ void IRAM_ATTR onTimerISR()
         {
             dimCounter[k]++;
             //temporary disable TOGGLE_MODE
-            
-               if (dimMode[k] == TOGGLE_MODE)
-               {
-             *****
-             * TOGGLE DIMMING MODE
-             *****
-             if (dimPulseBegin[k] >= togMax[k]) 	
-             {
-            // if reach max dimming value 
-            togDir[k] = false;	// downcount				
+
+            if (dimMode[k] == TOGGLE_MODE)
+           {
+                /*****
+                 * TOGGLE DIMMING MODE
+                 *****/
+                if (dimPulseBegin[k] >= togMax[k]) 	
+                {
+                    // if reach max dimming value 
+                    togDir[k] = false;	// downcount				
+                }
+                if (dimPulseBegin[k] <= togMin[k])
+                {
+                    // if reach min dimming value 
+                    togDir[k] = true;	// upcount
+                }
+                if (toggleCounter == toggleReload) 
+                {
+                    if (togDir[k] == true) dimPulseBegin[k]++;
+                    else dimPulseBegin[k]--;
+                }
             }
-            if (dimPulseBegin[k] <= togMin[k])
-            {
-            // if reach min dimming value 
-            togDir[k] = true;	// upcount
-            }
-            if (toggleCounter == toggleReload) 
-            {
-            if (togDir[k] == true) dimPulseBegin[k]++;
-            else dimPulseBegin[k]--;
-            }
-            }
-            	
+
             /*****
              * DEFAULT DIMMING MODE (NOT TOGGLE)
              *****/
