@@ -161,7 +161,7 @@ void IRAM_ATTR onTimerISR()
         {
             dimCounter[k]++;
             //temporary disable TOGGLE_MODE
-            /*
+            
                if (dimMode[k] == TOGGLE_MODE)
                {
              *****
@@ -183,16 +183,16 @@ void IRAM_ATTR onTimerISR()
             else dimPulseBegin[k]--;
             }
             }
-            */	
+            	
             /*****
              * DEFAULT DIMMING MODE (NOT TOGGLE)
              *****/
-            if (dimCounter[k] < dimPower[k] )// total 100 level(0-99) , HIGH ( power ) >> LOW ( 100 - power)
+            if (dimCounter[k] < dimPower[k]*10 )// total 100 level(0-99) , HIGH ( power ) >> LOW ( 100 - power)
             {
                 digitalWrite(dimOutPin[k], HIGH);	
             }
 
-            if (dimCounter[k] >=  dimPower[k] )
+            if (dimCounter[k] >=  dimPower[k]*10 )
             {
                 digitalWrite(dimOutPin[k], LOW);
                 zeroCross[k] = 0;
